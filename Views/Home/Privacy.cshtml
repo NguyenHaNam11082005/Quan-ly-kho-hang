@@ -1,0 +1,119 @@
+﻿@{
+    ViewData["Title"] = "Chính sách Bảo mật Thông tin";
+}
+
+<style>
+    body {
+        min-height: 100vh;
+        background: linear-gradient(135deg, #6a11cb, #2575fc);
+        font-family: 'Poppins', sans-serif;
+        color: #fff;
+    }
+
+    .glass-card {
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(15px);
+        border-radius: 1.5rem;
+        padding: 2rem;
+        margin-bottom: 2rem;
+        box-shadow: 0 8px 32px rgba(0,0,0,0.25);
+        transition: transform .3s ease;
+    }
+
+        .glass-card:hover {
+            transform: translateY(-5px);
+        }
+
+    .section-title {
+        font-size: 1.5rem;
+        font-weight: 700;
+        margin-bottom: 1.2rem;
+        color: #ffe082;
+        letter-spacing: 0.5px;
+        position: relative;
+    }
+
+        .section-title::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: -6px;
+            width: 50px;
+            height: 3px;
+            background: #ffca28;
+            border-radius: 3px;
+        }
+
+    .icon-glow {
+        font-size: 3rem;
+        color: #fff;
+        text-shadow: 0 0 12px rgba(255, 255, 255, 0.7), 0 0 24px rgba(0, 123, 255, 0.6);
+    }
+
+    .list-unstyled li {
+        margin-bottom: 0.8rem;
+        font-size: 1.05rem;
+    }
+
+    .list-unstyled i {
+        margin-right: 8px;
+        color: #90caf9;
+    }
+
+    blockquote {
+        border-left: 4px solid #90caf9;
+        padding-left: 1rem;
+        font-style: italic;
+        color: #e3f2fd;
+    }
+</style>
+
+<div class="container py-5">
+    <div class="text-center mb-5">
+        <i class="bi bi-shield-lock-fill icon-glow"></i>
+        <h1 class="fw-bold mt-3">@ViewData["Title"]</h1>
+        <p class="text-light fst-italic">
+            Phiên bản 1.0 – Cập nhật lần cuối: @DateTime.Now.ToString("dd/MM/yyyy")
+        </p>
+    </div>
+
+    <div class="glass-card">
+        <h2 class="section-title">🔹 I. Mục đích và Phạm vi</h2>
+        <p>
+            Chúng tôi cam kết bảo vệ thông tin cá nhân của bạn. Mọi dữ liệu đều được xử lý minh bạch, hợp pháp và an toàn,
+            phù hợp với chuẩn mực quốc tế về bảo mật thông tin.
+        </p>
+    </div>
+
+    <div class="glass-card">
+        <h2 class="section-title">🔹 II. Loại Dữ liệu Thu thập</h2>
+        <ul class="list-unstyled">
+            <li><i class="bi bi-person-badge"></i> Họ tên, Email, Số điện thoại</li>
+            <li><i class="bi bi-key"></i> Tài khoản & quyền truy cập</li>
+            <li><i class="bi bi-box-seam"></i> Lịch sử nhập/xuất kho, nhà cung cấp</li>
+        </ul>
+    </div>
+
+    <div class="glass-card">
+        <h2 class="section-title">🔹 III. Quyền của Người dùng</h2>
+        <blockquote>
+            “Bạn có quyền yêu cầu xem, chỉnh sửa hoặc xóa dữ liệu cá nhân bất kỳ lúc nào.”
+        </blockquote>
+    </div>
+
+    <div class="glass-card">
+        <h2 class="section-title">🔹 IV. Biện pháp Bảo mật</h2>
+        <p>
+            Chúng tôi áp dụng <strong>mã hóa tiên tiến</strong>, <strong>kiểm soát truy cập nghiêm ngặt</strong>
+            và <strong>kiểm tra bảo mật định kỳ</strong> để bảo vệ dữ liệu.
+        </p>
+    </div>
+
+    <div class="glass-card">
+        <h2 class="section-title">🔹 V. Cam kết</h2>
+        <p>
+            Chúng tôi <span class="text-warning fw-bold">không bao giờ</span> chia sẻ dữ liệu cho bên thứ ba
+            nếu không có sự đồng ý hợp pháp từ bạn, trừ khi pháp luật yêu cầu.
+        </p>
+    </div>
+</div>

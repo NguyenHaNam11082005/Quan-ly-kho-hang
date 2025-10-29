@@ -1,0 +1,319 @@
+﻿@* 
+
+
+
+@{
+    ViewData["Title"] = "Dashboard";
+    var data = ViewBag.MonthlyData as IEnumerable<dynamic>;
+}
+
+<div class="container mt-4">
+    <h2 class="text-center mb-4">📊 Thống kê kho hàng</h2>
+
+    <div class="row text-center">
+        <div class="col-md-4 mb-3">
+            <div class="card bg-primary text-white shadow">
+                <div class="card-body">
+                    <h3>@ViewBag.TotalProducts</h3>
+                    <p>Tổng số sản phẩm</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 mb-3">
+            <div class="card bg-success text-white shadow">
+                <div class="card-body">
+                    <h3>@ViewBag.TotalImport</h3>
+                    <p>Tổng đơn nhập</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 mb-3">
+            <div class="card bg-danger text-white shadow">
+                <div class="card-body">
+                    <h3>@ViewBag.TotalExport</h3>
+                    <p>Tổng đơn xuất</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="mt-5">
+        <canvas id="monthlyChart"></canvas>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        const labels = @Html.Raw(System.Text.Json.JsonSerializer.Serialize(data.Select(d => "Tháng " + d.Month)));
+        const importData = @Html.Raw(System.Text.Json.JsonSerializer.Serialize(data.Select(d => d.ImportCount)));
+        const exportData = @Html.Raw(System.Text.Json.JsonSerializer.Serialize(data.Select(d => d.ExportCount)));
+
+        new Chart(document.getElementById('monthlyChart'), {
+            type: 'bar',
+            data: {
+                labels: labels,
+                datasets: [
+                    {
+                        label: 'Sản phẩm nhập',
+                        data: importData,
+                        backgroundColor: 'rgba(54, 162, 235, 0.7)'
+                    },
+                    {
+                        label: 'Sản phẩm xuất',
+                        data: exportData,
+                        backgroundColor: 'rgba(255, 99, 132, 0.7)'
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                scales: { y: { beginAtZero: true } }
+            }
+        });
+    </script>
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ *@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@{
+    ViewData["Title"] = "Dashboard";
+    var data = ViewBag.MonthlyData as IEnumerable<dynamic>;
+}
+
+<div class="dashboard">
+    <header class="dashboard-header">
+        <h2>📊 Thống kê kho hàng</h2>
+        <p>Tổng quan hoạt động nhập - xuất hàng hóa theo tháng</p>
+    </header>
+
+    <section class="stats-grid">
+        <div class="stat-card">
+            <div class="icon bg-primary"><i class="bi bi-box-seam"></i></div>
+            <div>
+                <h3>@ViewBag.TotalProducts</h3>
+                <span>Tổng sản phẩm</span>
+            </div>
+        </div>
+        <div class="stat-card">
+            <div class="icon bg-success"><i class="bi bi-arrow-down-circle"></i></div>
+            <div>
+                <h3>@ViewBag.TotalImport</h3>
+                <span>Tổng đơn nhập</span>
+            </div>
+        </div>
+        <div class="stat-card">
+            <div class="icon bg-danger"><i class="bi bi-arrow-up-circle"></i></div>
+            <div>
+                <h3>@ViewBag.TotalExport</h3>
+                <span>Tổng đơn xuất</span>
+            </div>
+        </div>
+    </section>
+
+    <section class="chart-section">
+        <h4>📈 Biểu đồ nhập - xuất hàng theo tháng</h4>
+        <canvas id="monthlyChart"></canvas>
+    </section>
+</div>
+
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        const labels = @Html.Raw(System.Text.Json.JsonSerializer.Serialize(data.Select(d => "Tháng " + d.Month)));
+        const importData = @Html.Raw(System.Text.Json.JsonSerializer.Serialize(data.Select(d => d.ImportCount)));
+        const exportData = @Html.Raw(System.Text.Json.JsonSerializer.Serialize(data.Select(d => d.ExportCount)));
+
+        new Chart(document.getElementById('monthlyChart'), {
+            type: 'bar',
+            data: {
+                labels,
+                datasets: [
+                    {
+                        label: 'Sản phẩm nhập',
+                        data: importData,
+                        backgroundColor: 'rgba(78, 115, 223, 0.8)',
+                        borderRadius: 8
+                    },
+                    {
+                        label: 'Sản phẩm xuất',
+                        data: exportData,
+                        backgroundColor: 'rgba(231, 74, 59, 0.8)',
+                        borderRadius: 8
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'top',
+                        labels: { color: '#ddd', font: { size: 13 } }
+                    }
+                },
+                scales: {
+                    x: {
+                        ticks: { color: '#aaa' },
+                        grid: { display: false }
+                    },
+                    y: {
+                        beginAtZero: true,
+                        ticks: { color: '#aaa' },
+                        grid: { color: 'rgba(255,255,255,0.05)' }
+                    }
+                }
+            }
+        });
+    </script>
+}
+
+<style>
+    body {
+        background: #0f172a;
+        font-family: 'Inter', sans-serif;
+    }
+
+    .dashboard {
+        max-width: 1100px;
+        margin: 60px auto;
+        padding: 40px;
+        border-radius: 20px;
+        background: #1e293b;
+        box-shadow: 0 0 25px rgba(0,0,0,0.4);
+        color: #f1f5f9;
+        animation: fadeIn 0.8s ease;
+    }
+
+    .dashboard-header {
+        text-align: center;
+        margin-bottom: 40px;
+    }
+
+        .dashboard-header h2 {
+            font-size: 28px;
+            font-weight: 700;
+            color: #f8fafc;
+            margin-bottom: 8px;
+        }
+
+        .dashboard-header p {
+            color: #94a3b8;
+            font-size: 15px;
+        }
+
+    .stats-grid {
+        display: flex;
+        gap: 24px;
+        justify-content: space-between;
+        flex-wrap: wrap;
+    }
+
+    .stat-card {
+        flex: 1 1 30%;
+        display: flex;
+        align-items: center;
+        background: linear-gradient(135deg, #1e293b, #334155);
+        border-radius: 16px;
+        padding: 22px 26px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        transition: all 0.3s ease;
+    }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+        }
+
+    .icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 64px;
+        height: 64px;
+        border-radius: 16px;
+        font-size: 30px;
+        color: #fff;
+        margin-right: 18px;
+    }
+
+    .stat-card h3 {
+        margin: 0;
+        font-size: 28px;
+        font-weight: 700;
+        color: #f1f5f9;
+    }
+
+    .stat-card span {
+        color: #cbd5e1;
+        font-size: 14px;
+    }
+
+    .chart-section {
+        background: #1e293b;
+        margin-top: 50px;
+        padding: 30px;
+        border-radius: 16px;
+        box-shadow: 0 4px 14px rgba(0,0,0,0.25);
+    }
+
+        .chart-section h4 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #f8fafc;
+            font-weight: 600;
+        }
+
+    @@keyframes fadeIn {
+        from
+
+    {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    }
+</style>

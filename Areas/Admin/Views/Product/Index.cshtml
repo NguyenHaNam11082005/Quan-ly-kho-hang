@@ -1,0 +1,200 @@
+﻿@model X.PagedList.IPagedList<ProductModel>
+@using X.PagedList.Mvc.Core
+
+@{
+    ViewData["Title"] = "List Product";
+}
+
+<style>
+    body {
+        min-height: 100vh;
+        margin: 0;
+        font-family: 'Poppins', sans-serif;
+        background-color: #f5f5f5;
+        color: #333;
+    }
+
+    h1 {
+        font-weight: 600;
+        margin-bottom: 1.5rem;
+        color: #222;
+        text-align: center;
+    }
+
+    /* Nút tổng thể */
+    .btn {
+        font-weight: 500;
+        padding: 0.6rem 1.2rem;
+        border-radius: 0.75rem;
+        border: none;
+        cursor: pointer;
+        transition: all 0.25s ease;
+    }
+
+    /* Nút thêm */
+    .btn-success {
+        background: #2563eb; /* xanh ghi đậm */
+        color: #fff;
+        box-shadow: 0 2px 6px rgba(37, 99, 235, 0.2);
+    }
+
+        .btn-success:hover {
+            background: #1e40af;
+            box-shadow: 0 4px 10px rgba(37, 99, 235, 0.25);
+            transform: translateY(-1px);
+        }
+
+    /* Nút sửa */
+    .btn-primary {
+        background: #4b5563; /* xám đậm */
+        color: #fff;
+        box-shadow: 0 2px 6px rgba(75, 85, 99, 0.2);
+    }
+
+        .btn-primary:hover {
+            background: #374151;
+            box-shadow: 0 4px 10px rgba(75, 85, 99, 0.25);
+            transform: translateY(-1px);
+        }
+
+    /* Nút xóa */
+    .btn-danger {
+        background: #9b1c1c; /* đỏ trầm */
+        color: #fff;
+        box-shadow: 0 2px 6px rgba(155, 28, 28, 0.2);
+    }
+
+        .btn-danger:hover {
+            background: #7f1d1d;
+            box-shadow: 0 4px 10px rgba(155, 28, 28, 0.25);
+            transform: translateY(-1px);
+        }
+
+    /* Bảng */
+    .table {
+        width: 100%;
+        border-collapse: collapse;
+        background: #fff;
+        border-radius: 0.75rem;
+        overflow: hidden;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    }
+
+        .table thead {
+            background: #e9e9e9;
+        }
+
+        .table th, .table td {
+            text-align: center;
+            padding: 0.75rem;
+            border-bottom: 1px solid #ddd;
+        }
+
+    .table-hover tbody tr:hover {
+        background: #f2f2f2;
+        transition: all 0.2s ease;
+    }
+
+    /* Nút nhỏ */
+    .btn-sm {
+        border-radius: 0.5rem;
+        padding: 0.35rem 0.75rem;
+        font-size: 0.85rem;
+        font-weight: 500;
+    }
+
+    /* Phân trang */
+    .pagination {
+        justify-content: center;
+        margin-top: 1.5rem;
+        display: flex;
+        list-style: none;
+        padding: 0;
+    }
+
+    .page-item .page-link {
+        background: #e0e0e0;
+        border: none;
+        border-radius: 50%;
+        margin: 0 5px;
+        color: #333;
+        padding: 0.5rem 0.75rem;
+        transition: all 0.2s ease;
+    }
+
+        .page-item .page-link:hover {
+            background: #d0d0d0;
+        }
+
+    .page-item.active .page-link {
+        background: #4b5563;
+        color: #fff;
+    }
+</style>
+
+
+
+<div class="text-center container py-5">
+    <h1 class="display-4">✨ List Product ✨</h1>
+    <a class="btn btn-gradient mb-4" asp-controller="Product" asp-action="Create">➕ Create Product</a>
+
+    <table class="table table-bordered table-striped table-hover">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Mã SP</th>
+                <th>Tên sản phẩm</th>
+                <th>Đơn vị</th>
+                <th>Số lượng</th>
+                <th>Vị trí</th>
+                <th>Ghi chú</th>
+                <th>Ngày tạo</th>
+                <th>Ngày cập nhật</th>
+                <th>Quản lý</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model != null && Model.Any())
+            {
+                foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.Id</td>
+                        <td>@item.ProductCode</td>
+                        <td>@item.ProductName</td>
+                        <td>@item.ProductUnit</td>
+                        <td>@item.ProductQuantity</td>
+                        <td>@item.Location</td>
+                        <td>@item.ProductDescription</td>
+                        <td>@item.CreatedDate.ToString("dd/MM/yyyy HH:mm")</td>
+                        <td>@item.UpdatedDate.ToString("dd/MM/yyyy HH:mm")</td>
+                        <td>
+                            <a class="btn btn-sm btn-primary" href="@Url.Action("Edit", "Product", new { id = item.Id })">Edit</a>
+                            <form asp-action="Delete" asp-controller="Product" asp-route-id="@item.Id" method="post" style="display:inline" onsubmit="return confirm('Bạn có chắc chắn muốn xóa sản phẩm này?');">
+                                <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr>
+                    <td colspan="10" class="text-center text-danger fw-bold">🚫 Không có sản phẩm nào!</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    @Html.PagedListPager(Model, page => Url.Action("Index", new { page }),
+    new PagedListRenderOptions
+    {
+        LiElementClasses = new[] { "page-item" },
+        PageClasses = new[] { "page-link" },
+        UlElementClasses = new[] { "pagination" },
+        DisplayLinkToFirstPage = PagedListDisplayMode.Always,
+        DisplayLinkToLastPage = PagedListDisplayMode.Always,
+        DisplayLinkToPreviousPage = PagedListDisplayMode.Always,
+        DisplayLinkToNextPage = PagedListDisplayMode.Always
+    })
+</div>

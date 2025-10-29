@@ -1,0 +1,57 @@
+﻿@{
+    ViewData["Title"] = "Trang Chủ";
+}
+
+<!-- Hero Section -->
+<div class="position-relative text-center text-white"
+     style="background: linear-gradient(135deg, #6a11cb, #2575fc);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;">
+
+    <!-- Hiệu ứng background: những vòng tròn sáng bay bổng -->
+    <div class="position-absolute w-100 h-100" style="z-index:0;">
+        <div class="position-absolute rounded-circle bg-light opacity-25"
+             style="width:200px;height:200px;top:10%;left:15%;filter: blur(60px);animation: float 8s infinite;"></div>
+        <div class="position-absolute rounded-circle bg-info opacity-25"
+             style="width:300px;height:300px;bottom:15%;right:10%;filter: blur(80px);animation: float 12s infinite reverse;"></div>
+    </div>
+
+    <!-- Nội dung -->
+    <div class="container position-relative" style="z-index:1;">
+        <h1 class="display-2 fw-bold mb-4 animate__animated animate__fadeInDown">
+            ✨ Chào mừng đến với <span class="text-warning">Quản Lý Kho Hàng </span> ✨
+        </h1>
+        <p class="lead mb-5 animate__animated animate__fadeInUp">
+            Quản lý kho chưa bao giờ <strong>đẹp – dễ – kỳ diệu</strong> đến thế.
+            Trải nghiệm công nghệ hiện đại hòa quyện với một không gian huyền ảo.
+        </p>
+
+       
+    </div>
+</div>
+
+<!-- CSS animation -->
+<style>
+    @@keyframes float {
+        0%
+
+    {
+        transform: translateY(0px);
+    }
+
+    50% {
+        transform: translateY(-30px);
+    }
+
+    100% {
+        transform: translateY(0px);
+    }
+
+    }
+</style>
+
+<!-- Thêm animate.css (nếu chưa có) -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />

@@ -1,0 +1,76 @@
+﻿@{
+    ViewData["Title"] = "Truy cập bị từ chối";
+}
+
+<div class="access-denied d-flex flex-column justify-content-center align-items-center vh-100 text-center text-white">
+    <h1 class="display-3 fw-bold mb-3 animate-fade">🚫 Truy cập bị từ chối</h1>
+    <p class="lead mb-4 animate-fade-delay">Bạn không có quyền truy cập trang này.</p>
+    <a asp-area="Admin" asp-controller="Dashboard" asp-action="Index"
+       class="btn btn-glow px-5 py-3 rounded-pill fs-5">
+        ⬅ Quay lại trang chủ
+    </a>
+</div>
+
+<style>
+    /* Background gradient động */
+    .access-denied {
+        background: linear-gradient(-45deg, #0f2027, #203a43, #2c5364, #1e3c72);
+        background-size: 400% 400%;
+        animation: gradientBG 12s ease infinite;
+    }
+
+    @@keyframes gradientBG {
+        0%
+
+    {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+
+    }
+
+    /* Animation xuất hiện */
+    .animate-fade {
+        animation: fadeIn 2s ease-in-out;
+    }
+
+    .animate-fade-delay {
+        animation: fadeIn 2.5s ease-in-out;
+    }
+    @@keyframes fadeIn {
+        from
+
+    {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    }
+
+    /* Nút lung linh */
+    .btn-glow {
+        background: linear-gradient(45deg, #ff416c, #ff4b2b);
+        border: none;
+        color: white;
+        font-weight: bold;
+        box-shadow: 0 0 15px rgba(255, 75, 43, 0.7);
+        transition: all 0.3s ease;
+    }
+
+        .btn-glow:hover {
+            box-shadow: 0 0 25px rgba(255, 75, 43, 1);
+            transform: scale(1.08);
+        }
+</style>

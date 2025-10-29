@@ -1,0 +1,190 @@
+﻿@model ProductModel
+@{
+    ViewData["Title"] = "Edit Product";
+}
+
+<div class="product-edit-container">
+    <h1 class="title">✨ Edit Product ✨</h1>
+    <a class="btn-back" asp-controller="Product" asp-action="Index">← List Product</a>
+
+    <form asp-controller="Product" asp-action="Edit" method="post" class="form-card">
+        @Html.AntiForgeryToken()
+        <input type="hidden" asp-for="Id" />
+
+        <div class="mb-3">
+            <label class="form-label">Product Code</label>
+            <input type="text" asp-for="ProductCode" class="form-control" placeholder="Enter product code">
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Product Name</label>
+            <input type="text" asp-for="ProductName" class="form-control" placeholder="Enter product name">
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Product Description</label>
+            <input type="text" asp-for="ProductDescription" class="form-control" placeholder="Enter description">
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Product Quantity</label>
+            <input type="text" readonly asp-for="ProductQuantity" class="form-control">
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Location</label>
+            <input type="text" asp-for="Location" class="form-control" placeholder="Enter location">
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Product Unit</label>
+            <select class="form-select" asp-for="ProductUnit">
+                <option value="Cái">Cái</option>
+                <option value="Thùng">Thùng</option>
+                <option value="Bịch">Bịch</option>
+            </select>
+        </div>
+
+        <button type="submit" class="btn-submit">💾 Save</button>
+    </form>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
+
+<style>
+    /* Nền tối giản */
+    body {
+        background-color: #f5f5f5;
+        min-height: 100vh;
+        margin: 0;
+        font-family: 'Segoe UI', sans-serif;
+        color: #333;
+    }
+
+    /* Container chính */
+    .product-edit-container {
+        width: 100%;
+        max-width: 700px;
+        margin: 40px auto;
+        padding: 30px;
+        border-radius: 16px;
+        background: #fff;
+        box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+        text-align: center;
+        animation: fadeIn 0.6s ease;
+    }
+
+    /* Tiêu đề */
+    .title {
+        font-size: 2rem;
+        font-weight: 600;
+        color: #222;
+        margin-bottom: 20px;
+        text-align: center;
+    }
+
+    /* Nút quay lại */
+    .btn-back {
+        display: inline-block;
+        margin-bottom: 20px;
+        text-decoration: none;
+        color: #333;
+        background: #e5e7eb;
+        padding: 10px 20px;
+        border-radius: 24px;
+        transition: 0.25s ease;
+        font-weight: 500;
+    }
+
+        .btn-back:hover {
+            background: #d1d5db;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+    /* Form chính */
+    .form-card {
+        text-align: left;
+    }
+
+    .form-label {
+        font-weight: 500;
+        color: #444;
+        margin-bottom: 6px;
+        display: block;
+    }
+
+    /* Ô nhập liệu & select */
+    .form-control,
+    .form-select {
+        border-radius: 10px;
+        padding: 12px;
+        border: 1px solid #ccc;
+        background: #f9f9f9;
+        color: #333;
+        width: 100%;
+        transition: all 0.25s ease;
+        font-size: 0.95rem;
+    }
+
+        .form-control::placeholder {
+            color: #aaa;
+        }
+
+        .form-control:focus,
+        .form-select:focus {
+            background: #fff;
+            border-color: #9ca3af;
+            box-shadow: 0 0 0 3px rgba(156,163,175,0.2);
+            outline: none;
+        }
+
+        .form-control[readonly] {
+            background: #eee !important;
+            color: #555 !important;
+        }
+
+        .form-select option {
+            background: #fff;
+            color: #333;
+        }
+
+    /* Nút lưu */
+    .btn-submit {
+        background: #4b5563;
+        border: none;
+        padding: 12px 25px;
+        font-size: 1rem;
+        color: #fff;
+        border-radius: 24px;
+        cursor: pointer;
+        transition: all 0.25s ease;
+        display: block;
+        margin: 0 auto;
+        font-weight: 500;
+    }
+
+        .btn-submit:hover {
+            background: #374151;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.15);
+            transform: translateY(-1px);
+        }
+
+    /* Hiệu ứng xuất hiện */
+    @@keyframes fadeIn {
+        from
+
+    {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    }
+</style>
+

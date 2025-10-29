@@ -1,0 +1,159 @@
+﻿@model LoginViewModel
+
+@{
+    ViewData["Title"] = "Đăng nhập tài khoản CMS";
+}
+
+<style>
+    body {
+        min-height: 100vh;
+        background: #f4f4f5; /* xám sáng nhạt */
+        font-family: 'Poppins', sans-serif;
+        margin: 0;
+        color: #333;
+    }
+
+    /* Navbar dạng kính mờ nhẹ */
+    .navbar-glass {
+        background: rgba(255, 255, 255, 0.7);
+        backdrop-filter: blur(10px);
+        box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+    }
+
+        .navbar-glass .navbar-brand,
+        .navbar-glass .nav-link {
+            color: #2e2e2e !important;
+            font-weight: 500;
+        }
+
+            .navbar-glass .nav-link:hover {
+                color: #555 !important;
+            }
+
+    /* Wrapper */
+    .login-wrapper {
+        min-height: calc(100vh - 60px);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 2rem 1rem;
+    }
+
+    /* Card login */
+    .login-card {
+        background: #ffffffcc;
+        backdrop-filter: blur(8px);
+        border-radius: 1.25rem;
+        padding: 2.5rem;
+        width: 100%;
+        max-width: 400px;
+        box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+        color: #2e2e2e;
+        animation: fadeInUp 0.6s ease;
+    }
+
+        .login-card h1 {
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            font-size: 1.6rem;
+            text-align: center;
+            color: #1f2937;
+        }
+
+    .form-label {
+        font-weight: 500;
+        color: #444;
+    }
+
+    .form-control {
+        border-radius: 0.75rem;
+        border: 1px solid #d1d5db;
+        padding: 0.75rem 1rem;
+        margin-bottom: 1rem;
+        background: #fafafa;
+        transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+        .form-control:focus {
+            border-color: #6b7280;
+            box-shadow: 0 0 0 3px rgba(107, 114, 128, 0.2);
+            outline: none;
+        }
+
+    .form-check-label {
+        color: #555;
+    }
+
+    .btn-gradient {
+        background: #3f3f46; /* xám đậm */
+        border: none;
+        color: #fff;
+        font-weight: 600;
+        padding: 0.75rem;
+        border-radius: 0.75rem;
+        width: 100%;
+        transition: 0.25s ease;
+    }
+
+        .btn-gradient:hover {
+            background: #27272a; /* xám gần đen */
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+        }
+
+    @@keyframes fadeInUp {
+        from
+
+    {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    }
+</style>
+
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-glass">
+    <div class="container">
+        <a class="navbar-brand fw-bold" href="#">CMS System</a>
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav ms-auto">
+                
+              
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- Form login -->
+<div class="login-wrapper">
+    <div class="login-card text-center">
+        <h1><i class="bi bi-person-circle"></i> Đăng nhập</h1>
+        <form method="post" asp-controller="Account" asp-action="Login">
+            @Html.AntiForgeryToken()
+            <div class="mb-3 text-start">
+                <label for="exampleInputEmail1" class="form-label">Email</label>
+                <input type="email" asp-for="Email" class="form-control" id="exampleInputEmail1">
+            </div>
+            <div class="mb-3 text-start">
+                <label for="exampleInputPassword1" class="form-label">Mật khẩu</label>
+                <input type="password" asp-for="Password" class="form-control" id="exampleInputPassword1">
+            </div>
+            <div class="mb-3 form-check text-start">
+                <input type="checkbox" asp-for="RememberMe" class="form-check-input" id="exampleCheck1">
+                <label class="form-check-label" for="exampleCheck1">Ghi nhớ đăng nhập</label>
+            </div>
+            <button type="submit" class="btn-gradient">Đăng nhập</button>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
